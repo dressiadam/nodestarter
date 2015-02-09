@@ -14,11 +14,9 @@ only a simple frame for starting a new application.
 
 <ul>
 <li>Express</li>
-<li>Express</li>
-<li>Express</li>
+<li>Grunt</li>
+<li>Backbone</li>
+<li>Mongoose</li>
+<li>MongoDB</li>
+<li>SCSS</li>
 </ul>
-
-Grunt
-Backbone
-Mongoose
-MongoDB

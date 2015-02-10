@@ -28,12 +28,6 @@ module.exports = function(grunt) {
 					'public/js/page/*.js'
 				],
 				dest: 'public/js/simple.js'
-			},
-			css: {
-				src: [
-					'public/css/*.css'
-				],
-				dest: 'public/css/simple.css'
 			}
 		},
 		uglify: {
@@ -43,11 +37,15 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		cssmin: {
-			css: {
-				files: {
-					'public/css/simple.css': ['public/css/simple.css']
-				}
+		sass: {
+			dist: {
+				options: {
+					style: 'compressed'
+				},
+				src: [
+					'public/css/site.scss'
+				],
+				dest: 'public/css/simple.css'
 			}
 		},
 		watch: {
@@ -58,13 +56,13 @@ module.exports = function(grunt) {
 					'public/js/view/*.js',
 					'public/js/page/*.js'
 				],
-				tasks: ['clean:js', 'concat:js', 'uglify']
+				tasks: ['regenJS']
 			},
 			css: {
 				files: [
-					'public/css/*.css'
+					'public/css/*.scss'
 				],
-				tasks: ['clean:css', 'concat:css', 'cssmin']
+				tasks: ['regenCSS']
 			}
 		},
 		nodemon: {
@@ -81,6 +79,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-nodemon');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-concurrent');
-	grunt.loadNpmTasks('grunt-newer');
+	grunt.loadNpmTasks('grunt-contrib-sass');
 
-	grunt.registerTask('default', ['clean','concat','uglify', 'cssmin', 'concurrent'])};
+	grunt.registerTask('default', ['clean','sass', 'concat:js', 'uglify', 'concurrent']);
+	grunt.registerTask('regenJS', ['clean:js', 'concat:js', 'uglify']);
+	grunt.registerTask('regenCSS', ['clean:css', 'sass'])};

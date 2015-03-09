@@ -22,6 +22,6 @@ then just
 <li>Grunt</li>
 <li>Backbone</li>
 <li>Mongoose</li>
-<li>MongoDB</li>
+<li>MongoDB (Optional)</li>
 <li>SCSS</li>
 </ul>

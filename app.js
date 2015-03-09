@@ -14,12 +14,23 @@ app.server = http.createServer(app);
 
 app.config = config;
 
-app.db = mongoose.createConnection(config.mongodb.uri);
-app.db.on('error', console.error.bind(console, 'mongoose connection error: '));
-app.db.once('open', function () {
-	//and... we have a data store
-});
-require('./models')(app, mongoose);
+if (config.isMongoEnabled === true) {
+	console.log('connecting mongodb');
+	app.db = mongoose.createConnection(config.mongodb.uri);
+	app.db.on('error', console.error.bind(console, 'mongoose connection error: '));
+	app.db.once('open', function() {
+	});
+	require('./models')(app, mongoose);
+	app.use(session({
+		resave: true,
+		saveUninitialized: true,
+		secret: config.cryptoKey,
+		store: new mongoStore({ url: config.mongodb.uri })
+	}));
+}
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,12 +40,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-	resave: true,
-	saveUninitialized: true,
-	secret: config.cryptoKey,
-	store: new mongoStore({ url: config.mongodb.uri })
-}));
 
 require('./routes')(app);
 

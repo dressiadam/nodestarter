@@ -21,7 +21,5 @@ then just
 <li>Express</li>
 <li>Grunt</li>
 <li>Backbone</li>
-<li>Mongoose</li>
-<li>MongoDB (Optional)</li>
 <li>SCSS</li>
 </ul>

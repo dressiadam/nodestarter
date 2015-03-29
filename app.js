@@ -5,7 +5,6 @@ var config = require('./config'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
 	session = require('express-session'),
-	mongoose = require('mongoose'),
     http = require('http'),
 	app = express();
 

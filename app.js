@@ -5,6 +5,7 @@ var config = require('./config'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
 	session = require('express-session'),
+    compression = require('compression'),
     http = require('http'),
 	app = express();
 
@@ -13,6 +14,7 @@ app.server = http.createServer(app);
 app.config = config;
 
 // view engine setup
+app.use(compression());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(logger('dev'));

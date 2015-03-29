@@ -1,5 +1,4 @@
-var config = require('./config'),
-	express = require('express'),
+var express = require('express'),
 	path = require('path'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
@@ -10,8 +9,7 @@ var config = require('./config'),
 	app = express();
 
 app.server = http.createServer(app);
-
-app.config = config;
+app.port = 3000;
 
 // view engine setup
 app.use(compression());
@@ -59,6 +57,6 @@ app.use(function(err, req, res, next) {
 app.utility = {};
 app.utility.workflow = require('./util/workflow');
 
-app.server.listen(app.config.port, function(){
-	console.log('Listening on ' + app.config.port);
+app.server.listen(app.port, function(){
+	console.log('Listening on ' + app.port);
 });

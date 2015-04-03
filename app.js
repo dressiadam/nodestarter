@@ -3,7 +3,6 @@ var express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
-	session = require('express-session'),
     compression = require('compression'),
     http = require('http'),
 	app = express();
@@ -53,9 +52,6 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
-app.utility = {};
-app.utility.workflow = require('./util/workflow');
 
 app.server.listen(app.port, function(){
 	console.log('Listening on ' + app.port);
